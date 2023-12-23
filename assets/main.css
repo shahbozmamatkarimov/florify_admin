@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow: hidden;
+  background: #f4f4f6;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.custom_scroll ::-webkit-scrollbar {
+  background: #e7e7e7;
+  height: 16px;
+}
+
+.scroll_chat ::-webkit-scrollbar {
+  height: 0;
+}
+
+.custom_scroll ::-webkit-scrollbar-thumb {
+  background: #5c0099;
+  border-radius: 10px;
+}
+
+.overflow-x-auto ::-webkit-scrollbar-thumb {
+  background-color: #5c0099;
+  border-radius: 10px;
+}
+
+:where(.css-dev-only-do-not-override-hkh161).ant-modal .ant-modal-close,
+:where(.css-dev-only-do-not-override-hkh161).ant-modal .ant-modal-footer {
+  display: none;
+}
+
+[rel="2"] {
+  display: none;
+}
+
+.apexcharts-grid-borders,
+.apexcharts-grid,
+.apexcharts-xaxis-tick {
+  display: none;
+}
+
+.apexcharts-tooltip {
+  box-shadow: none !important;
+  background: transparent;
+  overflow: visible !important;
+  /* top: 50% !important;
+  left: 50% !important;  */
+  transform: translate(500%, -20%) !important;
+}
+
+.ant-select *,
+.ant-picker {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  --tw-ring-color: none !important;
+  font-size: 14px !important;
+}
+
+.ant-select-arrow,
+.ant-picker-suffix {
+  display: none !important;
+}
+
+.ant-picker,
+.status .ant-select-selector {
+  height: 46px !important;
+  background: #f4f4f6 !important;
+  border: none !important;
+  width: 160px;
+  color: black !important;
+  padding: 16px;
+  padding-right: 40px;
+  line-height: normal !important;
+}
+
+.ant-input-affix-wrapper {
+  height: 40px !important;
+}
+
+.status .ant-select-selector {
+  padding: 8px 14px !important;
+  width: 120px !important;
+}
+
+.ant-select-selector, .ant-input-affix-wrapper-lg, .ant-input-affix-wrapper-lg *, .ant-input-number-lg {
+  background: #F9F9F9 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 !important;
+}
+
+.ant-select-selection-overflow-item {
+  display: none !important;
+}
+
+.ant-modal-close, .ant-modal-footer {
+  display: none !important;
+}
+
+.border-dashed {
+    border: dashed 2px #a7a1a1d8;
+}
+
+@media (min-width: 768px) {
+  .border-b {
+    border-bottom: 0 !important;
+  }
+}
+
+@media (min-width: 768px){
+  .reload {
+    display: none !important;
+  }
+}
+
+
+@media (min-width: 1160px) and (max-width: 1280px) {
+  .flowerImage {
+    height: 200px;
+  }
+}
+
+
+@media (min-width: 880px) and (max-width: 1024px) {
+  .flowerImage {
+    height: 230px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+  .flowerImage {
+    height: 230px;
+  }
+}
+
+@media (max-width: 470px) {
+  .flowersGrid {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+input {
+  outline: none;
+  background: transparent;
+  height: 40px;
+  border-radius: 60px !important;
+  padding: 0 20px;
+}
