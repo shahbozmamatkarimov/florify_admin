@@ -47,10 +47,15 @@
   </main>
 </template>
 <script setup>
+import axios from "axios";
+
 definePageMeta({
   layout: "false",
   middleware: ["auth"],
 });
+
+const runtimeconfig = useRuntimeConfig();
+const baseUrl = runtimeconfig.public.apiBaseUrl;
 
 const phone = ref("");
 const router = useRouter();
@@ -59,19 +64,12 @@ const router = useRouter();
 const sendPhone = () => {
   const phoneNumber = document.querySelector("#tel").value;
   console.log(phoneNumber.length);
-  if (phoneNumber.length === 19) {
-    fetch("https://florify-market.onrender.com/api/salesman/sendOtp", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ phone: phone.value }),
-    })
+  if (phoneNumber.length === 12) {
+    axios
+      .post(baseUrl + "/otp/sendOtp", { phone: '+998' + phone.value })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("phone", phone.value);
-        router.push("/otp_verification");
+        router.push("/otp_verification?phone=" +'+998' + phone.value);
       })
       .catch((error) => {
         notification.warning(error);

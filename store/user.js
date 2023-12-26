@@ -21,7 +21,7 @@ export const useUsersStore = defineStore("users", () => {
 
   function createUser() {
     if (isLoading.modal.edit) {
-      updateUser();
+      editUser();
       return;
     }
     isLoading.modal.create = false;
@@ -34,7 +34,23 @@ export const useUsersStore = defineStore("users", () => {
       })
       .catch((err) => {
         console.log(err);
-        isLoading.addLoading("getUsers");
+        isLoading.removeLoading("getUsers");
+      });
+  }
+
+  function editUser() {
+    isLoading.modal.create = false;
+    isLoading.modal.edit = false;
+    isLoading.addLoading("getUsers");
+    axios
+      .post(baseUrl + `/salesman/register`, create)
+      .then((res) => {
+        console.log(res);
+        getUsers();
+      })
+      .catch((err) => {
+        console.log(err);
+        isLoading.removeLoading("getUsers");
       });
   }
 
@@ -54,15 +70,16 @@ export const useUsersStore = defineStore("users", () => {
   }
 
   function deleteUser() {
-    isLoading.addLoading("deleteUser");
+    isLoading.addLoading("getUsers");
+    isLoading.modal.delete = false;
     axios
       .delete(baseUrl + `/salesman/${store.id}`)
       .then((res) => {
         console.log(res);
-        isLoading.removeLoading("deleteUser");
+        getUsers();
       })
       .catch((err) => {
-        isLoading.removeLoading("deleteUser");
+        isLoading.addLoading("getUsers");
         console.log(err);
       });
   }

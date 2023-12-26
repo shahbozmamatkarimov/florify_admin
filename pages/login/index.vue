@@ -106,7 +106,7 @@ const handleSubmit = () => {
     phone: useAuth.form.phone,
     password: useAuth.form.password,
   };
-  fetch(baseUrl + "/salesman/login", {
+  fetch(baseUrl + "/admin/login", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {

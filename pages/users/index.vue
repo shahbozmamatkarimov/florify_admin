@@ -34,12 +34,6 @@
                       >
                         Phone
                       </th>
-                      <th
-                      scope="col"
-                      class="px-4 py-4 text-left tracking-wider"
-                    >
-                      Username
-                    </th>
                       <th scope="col" class="px-4 py-4 min-w-[40px]"></th>
                     </tr>
                   </thead>
@@ -73,11 +67,6 @@
                       >
                         <p class="font-medium">{{ i.phone }}</p>
                       </td>
-                      <td
-                      class="px-4 items-center align-start w-40 whitespace-nowrap"
-                    >
-                      <p class="font-medium">{{ i.username }}</p>
-                    </td>
                       <td
                         class="flex items-center justify-center mx-2 px-4 py-4 space-x-2 whitespace-nowrap"
                       >
@@ -211,13 +200,6 @@
                   class="w-full"
                   v-model="useUsers.create.phone"
                   placeholder="Telefon raqam"
-                  required
-                />
-                <input
-                  v-model="useUsers.create.username"
-                  type="text"
-                  class="w-full"
-                  placeholder="Username"
                   required
                 />
                 <input

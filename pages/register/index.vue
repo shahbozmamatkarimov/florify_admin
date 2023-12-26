@@ -57,26 +57,45 @@
           </div>
           <hr />
         </a-space>
-        <a-input
-          v-model:value="useAuth.register.email"
-          bordered="false"
-          type="email"
-          autofocus
-          class="font-medium input w-full focus:border-0 border-0 focus:outline-0 outline-0 focus:ring-0 ring-0 placeholder-[#555555] -ml-3"
-          autocomplete="email"
-          placeholder="Email"
-          required
-        />
-        <a-input
-          v-model:value="useAuth.register.username"
-          bordered="false"
-          type="text"
-          autofocus
-          class="font-medium input w-full focus:border-0 border-0 focus:outline-0 outline-0 focus:ring-0 ring-0 placeholder-[#555555] -ml-3"
-          autocomplete="username"
-          placeholder="Username"
-          required
-        />
+        <a-space direction="vertical">
+          <a-input
+            v-model:value="useAuth.register.email"
+            bordered="false"
+            type="email"
+            autofocus
+            class="font-medium input w-full focus:border-0 border-0 focus:outline-0 outline-0 focus:ring-0 ring-0 placeholder-[#555555] -ml-3"
+            autocomplete="email"
+            placeholder="Email"
+            required
+          />
+          <hr />
+        </a-space>
+        <a-space direction="vertical">
+          <a-input
+            v-model:value="useAuth.register.username"
+            bordered="false"
+            type="text"
+            autofocus
+            class="font-medium input w-full focus:border-0 border-0 focus:outline-0 outline-0 focus:ring-0 ring-0 placeholder-[#555555] -ml-3"
+            autocomplete="username"
+            placeholder="Username"
+            required
+          />
+          <hr />
+        </a-space>
+        <a-space direction="vertical">
+          <a-input
+            v-model:value="useAuth.register.secret_key"
+            bordered="false"
+            type="text"
+            autofocus
+            class="font-medium input w-full focus:border-0 border-0 focus:outline-0 outline-0 focus:ring-0 ring-0 placeholder-[#555555] -ml-3"
+            autocomplete="secret_key"
+            placeholder="Secret_key"
+            required
+          />
+          <hr />
+        </a-space>
         <button
           type="submit"
           class="text-white space-y-1 bg-[#5C0099] border border-[#5C0099] active:bg-white active:text-[#5C0099] h-12 rounded-xl"

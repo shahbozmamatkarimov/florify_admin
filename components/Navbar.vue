@@ -47,7 +47,7 @@
             </button>
             <div>
               <button
-              @click="useCategory.store.createModal = true"
+                @click="useCategory.store.createModal = true"
                 type="button"
                 class="flex items-center gap-2 text-white bg-[#088178] hover:bg-[#08817970] font-medium rounded-lg px-5 py-2.5"
               >
@@ -113,7 +113,8 @@
               <div
                 class="flex items-center gap-1 self-center text-2xl font-semibold whitespace-nowrap"
               >
-                <h1>{{ $t("add_product") }}</h1>
+                <h1 v-if="isLoading.modal.edit">Mahsulot tahrirlash</h1>
+                <h1 v-else>Mahsulot qo'shish</h1>
                 <img
                   class="font-semibold text-3xl"
                   src="../assets/svg/star.svg"
@@ -131,21 +132,15 @@
             </div>
             <!-- Modal body -->
             <div
-              :class="
-                store.is_submit
-                  ? 'pointer-events-none'
-                  : ''
-              "
+              :class="store.is_submit ? 'pointer-events-none' : ''"
               class="xl:gap-16 gap-5 p-5 bg-white rounded-t-xl md:flex justify-between w-full overflow-x-hidden overflow-y-auto md:max-h-[calc(100vh_-_170px)] max-h-[calc(100vh_-_245px)]"
             >
               <div class="flex flex-col w-full">
                 <div class="space-y-5 pb-5 w-[80%]">
                   <label class="flex gap-3" for="name"
-                    ><span
-                      >Kategoriya nomi
-                      <i class="text-[#FF6161]">*</i></span
-                    ><img src="../assets/svg/warn.svg" alt="img"
-                  />UZ</label>
+                    ><span>Kategoriya nomi <i class="text-[#FF6161]">*</i></span
+                    ><img src="../assets/svg/warn.svg" alt="img" />UZ</label
+                  >
                   <a-input
                     id="name"
                     size="large"
@@ -159,11 +154,9 @@
                 </div>
                 <div class="space-y-5 pb-5 w-[80%]">
                   <label class="flex gap-3" for="name"
-                    ><span
-                      >Kategoriya nomi
-                      <i class="text-[#FF6161]">*</i></span
-                    ><img src="../assets/svg/warn.svg" alt="img"
-                  />RU</label>
+                    ><span>Kategoriya nomi <i class="text-[#FF6161]">*</i></span
+                    ><img src="../assets/svg/warn.svg" alt="img" />RU</label
+                  >
                   <a-input
                     id="name"
                     size="large"
@@ -178,10 +171,9 @@
                 <div class="pb-5 space-y-5">
                   <label class="flex gap-3" for="description"
                     ><span
-                      >Kategoriya tavsifi
-                      <i class="text-[#FF6161]">*</i></span
-                    ><img src="../assets/svg/warn.svg" alt="img"
-                  />UZ</label>
+                      >Kategoriya tavsifi <i class="text-[#FF6161]">*</i></span
+                    ><img src="../assets/svg/warn.svg" alt="img" />UZ</label
+                  >
                   <div>
                     <a-textarea
                       id="description"
@@ -195,10 +187,9 @@
                 <div class="pb-5 space-y-5">
                   <label class="flex gap-3" for="description"
                     ><span
-                      >Kategoriya tavsifi
-                      <i class="text-[#FF6161]">*</i></span
-                    ><img src="../assets/svg/warn.svg" alt="img"
-                  />RU</label>
+                      >Kategoriya tavsifi <i class="text-[#FF6161]">*</i></span
+                    ><img src="../assets/svg/warn.svg" alt="img" />RU</label
+                  >
                   <div>
                     <a-textarea
                       id="description"
@@ -222,8 +213,15 @@
                   v-if="useCategory.create.file"
                 >
                   <img
+                    v-if="isLoading.modal.edit && store.file"
                     class="w-full h-full opacity-50 absolute object-cover rounded-xl"
                     :src="store.file"
+                    alt="img"
+                  />
+                  <img
+                    v-else
+                    class="w-full h-full opacity-50 absolute object-cover rounded-xl"
+                    :src="baseUrlImage + useCategory.create.file"
                     alt="img"
                   />
                   <label
@@ -288,7 +286,7 @@
                   class="bg-[#F9F9F9] hover:bg-[#b8b4b4] max-w-[400px] w-full focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   :disabled="store.is_submit ? true : false"
                 >
-                  {{ $t("ready") }}
+                  <span>Tayyor</span>
                 </button>
                 <button
                   v-else
@@ -327,10 +325,11 @@
 <script setup>
 import axios from "axios";
 import { useNotification } from "@/composables/notification";
-import { useCategoryStore } from "@/store";
+import { useCategoryStore, useLoadingStore } from "@/store";
 
 const { showLoading, showSuccess, showWarning, showError } = useNotification();
 const useCategory = useCategoryStore();
+const isLoading = useLoadingStore();
 
 const runtimeconfig = useRuntimeConfig();
 const baseUrlImage = ref(runtimeconfig.public.apiBaseUrl?.slice(0, -3));
@@ -405,6 +404,7 @@ const create = reactive({
 
 function closeModal() {
   useCategory.store.createModal = false;
+  isLoading.modal.edit = false;
 }
 
 function uploadFile(e, number) {
@@ -419,7 +419,11 @@ function uploadFile(e, number) {
 }
 
 const handleSubmit = () => {
-  useCategory.createCategory();
+  if (isLoading.modal.edit) {
+    useCategory.editCategory();
+  } else {
+    useCategory.createCategory();
+  }
 };
 
 // function deleteStaticFile(id, file_name) {
@@ -462,11 +466,4 @@ label {
 }
 </style>
 
-
-phone
-additional_phone
-email
-address
-facebook
-instagram
-telegram
+phone additional_phone email address facebook instagram telegram

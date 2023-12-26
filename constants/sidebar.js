@@ -61,4 +61,13 @@ export const sidebar = [
     Уз: "Настройки",
     path: "/categories",
   },
+  {
+    id: 6,
+    _icon: _settings,
+    icon: settings,
+    icon1: settings1,
+    Uz: "Social networks",
+    Уз: "Настройки",
+    path: "/social_networks",
+  },
 ];

@@ -16,6 +16,7 @@ export const useAuthStore = defineStore("isLogged", () => {
     password: "",
     email: "",
     username: "",
+    secret_key: "",
   });
 
   function checkAuth() {
@@ -52,6 +53,9 @@ export const useAuthStore = defineStore("isLogged", () => {
       .post(baseUrl + "/admin/register", register)
       .then((res) => {
         console.log(res);
+        if (res.data.statusCode == 201){
+          router.push("/login");
+        }
       })
       .catch((err) => {
         console.log(err);
